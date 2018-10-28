@@ -5,7 +5,7 @@ Target distro: debian/raspbian
 
 ## How to use this script:
 ~~~~
-curl -H 'Accept: application/vnd.github.v3.raw' https://api.github.com/repos/vhsjwp01/influxdb-armhf-installer/contents/influxdb-arm-installer.sh -s | bash
+curl -L https://github.com/vhsjwp01/influxdb-armhf-installer/raw/master/influx-arm-installer.sh -s | bash
 ~~~~
 
 ## NOTES:
