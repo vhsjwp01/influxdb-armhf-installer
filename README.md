@@ -4,8 +4,16 @@ A shell script to aid in installing the influxdb binary distribution for ARMhf a
 Target distro: debian/raspbian
 
 ## How to use this script:
+STABLE Build:
 ~~~~
 curl -L https://github.com/vhsjwp01/influxdb-armhf-installer/raw/master/influx-arm-installer.sh -s | bash
+~~~~
+
+Nightly Build:
+~~~~
+curl -OL https://github.com/vhsjwp01/influxdb-armhf-installer/raw/master/influx-arm-installer.sh -s | bash
+chmod +x ./influx-arm-installer.sh
+./influx-arm-installer.sh nightly
 ~~~~
 
 ## NOTES:

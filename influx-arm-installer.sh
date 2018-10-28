@@ -45,7 +45,7 @@ f__print_line() {
 #
 if [ ${exit_code} -eq ${SUCCESS} ]; then
     echo -ne "Looking for needed commands: "
-    needed_commands="awk bc chown chmod cpio curl cut dirname egrep elinks find head id sort tar wc wget zcat"
+    needed_commands="awk bc chown chmod cpio curl cut dirname egrep elinks find head id sort tail tar wc wget zcat"
 
     for needed_command in ${needed_commands} ; do
         echo -ne "${needed_command} "
@@ -84,12 +84,23 @@ if [ ${exit_code} -eq ${SUCCESS} ]; then
 
 fi
 
+# WHAT: See if we were passed an argument
+# WHY:  It may affect what we download
+#
+if [ ${exit_code} -eq ${SUCCESS} ]; then
+
+    if [ "${1}" = "nightly" ]; then
+        INFLUXDB_IGNORE_REGEX="${INFLUXDB_IGNORE_REGEX}|nightly"
+    fi
+
+fi
+    
 # WHAT: Figure out our fetch command from the vendor download URL and download the software archive
 # WHY:  If successful, we will be unpacking and then installing the software
 #
 if [ ${exit_code} -eq ${SUCCESS} ]; then
     f__print_line "Querying ${INFLUXDB_DL_URL} for download command"
-    fetch_command=$(curl ${INFLUXDB_DL_URL} -s | elinks -dump | egrep "${INFLUXDB_REGEX}" | egrep -v "${INFLUXDB_IGNORE_REGEX}")
+    fetch_command=$(curl ${INFLUXDB_DL_URL} -s | elinks -dump | egrep "${INFLUXDB_REGEX}" | egrep -v "${INFLUXDB_IGNORE_REGEX}" | sort -u | tail -1)
 
     if [ "${fetch_command}" = "" ]; then
         echo "ERROR"
