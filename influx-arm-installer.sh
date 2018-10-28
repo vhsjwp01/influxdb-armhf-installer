@@ -91,6 +91,9 @@ if [ ${exit_code} -eq ${SUCCESS} ]; then
 
     if [ "${1}" = "nightly" ]; then
         INFLUXDB_IGNORE_REGEX="${INFLUXDB_IGNORE_REGEX}|nightly"
+        INFLUXDB_REGEX="wget.*influxdb.*nightly.*armhf.*\.tar\.gz"
+    else
+        INFLUXDB_IGNORE_REGEX="${INFLUXDB_IGNORE_REGEX}|nightly"
     fi
 
 fi
