@@ -102,7 +102,7 @@ fi
 #
 if [ ${exit_code} -eq ${SUCCESS} ]; then
     f__print_line "Querying ${INFLUXDB_DL_URL} for download command"
-    fetch_command=$(curl ${INFLUXDB_DL_URL} -s | elinks -dump | egrep "${INFLUXDB_REGEX}" | egrep -v "${INFLUXDB_IGNORE_REGEX}" | sort -u | tail -1)
+    fetch_command=$(curl -L ${INFLUXDB_DL_URL} -s | elinks -dump | egrep "${INFLUXDB_REGEX}" | egrep -v "${INFLUXDB_IGNORE_REGEX}" | sort -u | tail -1)
 
     if [ "${fetch_command}" = "" ]; then
         echo "ERROR"
